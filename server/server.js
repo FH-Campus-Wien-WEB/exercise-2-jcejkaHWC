@@ -11,26 +11,39 @@ app.use(bodyParser.json());
 // Serve static content in directory 'files'
 app.use(express.static(path.join(__dirname, 'files')));
 
-// Configure a 'get' endpoint for all movies..
+// server/server.js
 app.get('/movies', function (req, res) {
-  /* Task 1.2. Remove the line below and eturn the movies from 
-     the model as an array */
-  res.sendStatus(404)
+  // Task 1.2: Wandelt das Objekt-Modell in ein Array um
+  const movieArray = Object.values(movieModel);
+  res.json(movieArray);
 })
 
 // Configure a 'get' endpoint for a specific movie
 app.get('/movies/:imdbID', function (req, res) {
-  /* Task 2.1. Remove the line below and add the 
-    functionality here */
-  res.sendStatus(404)
-})
+  const movie = movieModel[req.params.imdbID];
+  if (movie) {
+    res.json(movie);
+  } else {
+    res.sendStatus(404);
+  }
+});
 
-/* Task 3.1 and 3.2.
-   - Add a new PUT endpoint
-   - Check whether the movie sent by the client already exists 
-     and continue as described in the assignment */
+// Task 3.1 & 3.2: Änderungen speichern (Update oder Create)
+app.put('/movies/:imdbID', function (req, res) {
+  const imdbID = req.params.imdbID;
+  const movieData = req.body;
+  const exists = !!movieModel[imdbID];
 
-app.listen(3000)
+  movieModel[imdbID] = movieData; // Speichert die Daten im RAM
 
-console.log("Server now listening on http://localhost:3000/")
+  if (exists) {
+    res.sendStatus(200); // Task 3.1
+  } else {
+    res.status(201).json(movieData); // Task 3.2: Status 201 + Objekt zurückschicken
+  }
+});
+
+app.listen(3000);
+console.log("Server now listening on http://localhost:3000/");
+
 

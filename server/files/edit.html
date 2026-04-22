@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Film bearbeiten</title>
+    <link rel="stylesheet" href="edit.css">
+    <script src="edit.js" defer></script>
+</head>
+<body>
+    <h1>Film bearbeiten</h1>
+    <form>
+        <input type="hidden" id="imdbID">
+        
+        <div><label>Titel:</label><input type="text" id="Title"></div>
+        <div><label>Jahr (Released):</label><input type="date" id="Released"></div>
+        <div><label>Dauer (min):</label><input type="number" id="Runtime"></div>
+        <div>
+            <label>Genres:</label>
+            <select id="Genres" multiple size="5">
+                <option value="Action">Action</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Horror">Horror</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Drama">Drama</option>
+            </select>
+        </div>
+        <div><label>Regisseure:</label><input type="text" id="Directors"></div>
+        <div><label>Autoren:</label><input type="text" id="Writers"></div>
+        <div><label>Schauspieler:</label><input type="text" id="Actors"></div>
+        <div><label>Handlung:</label><textarea id="Plot"></textarea></div>
+        <div><label>Poster URL:</label><input type="text" id="Poster"></div>
+        <div><label>Metascore:</label><input type="number" id="Metascore"></div>
+        <div><label>IMDb Rating:</label><input type="number" step="0.1" id="imdbRating"></div>
+
+        <button type="button" onclick="putMovie()">Speichern</button>
+        <button type="button" onclick="location.href='index.html'">Abbrechen</button>
+    </form>
+</body>
+</html>
